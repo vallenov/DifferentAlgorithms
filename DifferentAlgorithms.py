@@ -1,7 +1,7 @@
-def hamming(n):
+def hamming(n: int) -> int:
     '''
     Calculate the Hamming numbers
-    :params:
+    :params n: Hamming number required
 
     :return: nth Hamming number
 
