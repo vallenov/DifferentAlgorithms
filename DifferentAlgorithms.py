@@ -1,10 +1,8 @@
 def hamming(n: int) -> int:
     '''
     Calculate the Hamming numbers
-    :params n: Hamming number required
-
+    :param n: Hamming number required
     :return: nth Hamming number
-
     :example: print(hamming(5000))
     '''
     mas = []
