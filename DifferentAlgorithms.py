@@ -8,8 +8,6 @@ def hamming(n):
     :example: print(hamming(5000))
     '''
     a2 = 1
-    a3 = 1
-    a5 = 1
     mas = []
     for i in range(1, 50):
         a3 = 1
