@@ -18,3 +18,24 @@ def hamming(n: int) -> int:
         a2 *= 2
     mas.sort()
     return mas[n-1]
+
+
+def decompose(n: int) -> int:
+    '''
+    Decompose input number (if n=11, output: [1, 2, 4, 10], explain: 1**2 + 2**2 + 4**2 + 10**2 == 11**2)
+    :param n: Input number to decompose
+    :return: Result of decompose
+    '''
+    summ = 0
+    end = [n]
+    while end:
+        cur = end.pop()
+        summ += cur ** 2
+        for i in range(cur - 1, 0, -1):
+            if summ - (i ** 2) >= 0:
+                summ -= i ** 2
+                end.append(i)
+                if summ == 0:
+                    end.reverse()
+                    return end
+    return None
