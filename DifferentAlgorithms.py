@@ -128,3 +128,39 @@ def snail(snail: list) -> list:
         if value % 2: count -= 1
         value = (value+1) % 4
     return end
+
+
+def smallest_possible_sum(seq: list) -> int:
+    '''
+    Find smallect possible sum of the input list
+    Solution steps:
+    [6, 9, 21] #-> x[2] = 21 - 9
+    [6, 9, 12] #-> X[2] = 12 - 9
+    [6, 9, 6] #-> X[2] = 9 - 6
+    [6, 3, 6] #-> X[1] = 6 - 3
+    [6, 3, 3] #-> X[2] = 6 - 3
+    [3, 3, 3] #-> X[1] = 3 - 3 stop return sum([3, 3, 3])
+
+    :param seq: input list
+    :return: smallest possible sum
+    '''
+    def rec(seq):
+        if len(seq) == 1: return sum(seq)
+        l = len(seq)
+        lst = []
+        value = max(seq)
+        if seq.count(seq[0]) == l: return seq[0]
+        for num in range(l - 1):
+            if seq[num] < seq[num + 1]:
+                value = seq[num + 1] % seq[num]
+                if value == 0: value = seq[num]
+            elif seq[num] > seq[num + 1]:
+                value = seq[num] % seq[num + 1]
+                if value == 0: value = seq[num + 1]
+            lst.append(value)
+        return rec(lst)
+    l = len(seq)
+    if l <= 10:
+        return rec(seq) * l
+    else:
+        return rec(seq[:20]) * l
