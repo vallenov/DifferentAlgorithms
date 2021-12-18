@@ -39,3 +39,65 @@ def decompose(n: int) -> int:
                     end.reverse()
                     return end
     return None
+
+
+class RomanNumerals(object):
+
+    @staticmethod
+    def to_roman(number):
+        '''Str roman to int
+        :param number: int like 1616
+        :return: roman like 'MDCXVI'
+        :example: print(RomanNumerals.from_roman(1616))'''
+        dict = {1000: 'M', 500: 'D', 100: 'C', 50: 'L', 10: 'X', 5: 'V', 1: 'I'}
+        string = list(str(number))
+        lst = []
+        roman = ''
+        lst.append(int(string[len(string) - 1]))
+        string = string[::-1]
+        for dec in range(1, 4):
+            if len(string) <= 1: break
+            if string[dec]: lst.append(int(string[dec]) * (10 ** dec))
+        lst = lst[::-1]
+        sortkeys = sorted(dict.keys())[::-1]
+        for element in lst:
+            i = 0
+            for sort in sortkeys:
+                while element:
+                    value = element - sort
+                    if value >= 0:
+                        roman += dict[sort]
+                        element -= sort
+                        continue
+                    else:
+                        value = abs(value)
+                        if dict.get(value):
+                            roman += dict[value]
+                            roman += dict[sort]
+                            element -= sort - value
+                        elif dict.get(value * 2):
+                            roman += dict[value] * 2
+                            roman += dict[sort]
+                            element -= sort - value * 2
+                        else:
+                            break
+        return roman
+
+    @staticmethod
+    def from_roman(roman):
+        '''
+        Str roman to int
+        :param roman: string like 'MDCXVI'
+        :return: number int 1616
+        :example: print(RomanNumerals.from_roman('MDCXVI'))
+        '''
+        dict = {'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1}
+        number = 0
+        prev = 0
+        for i in range(len(roman) - 1, -1, -1):
+            if prev <= dict[roman[i]]:
+                number += dict[roman[i]]
+                prev = dict[roman[i]]
+            else:
+                number -= dict[roman[i]]
+        return number
