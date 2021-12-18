@@ -101,3 +101,30 @@ class RomanNumerals(object):
             else:
                 number -= dict[roman[i]]
         return number
+
+
+def snail(snail: list) -> list:
+    '''
+    Convert array from [[ 1,  2,  3, 4],
+                                    [12, 13, 14, 5],
+                                    [11, 16, 15, 6],
+                                    [10,  9,  8, 7]]
+    to [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    :param snail: array NxN [[], [], []]
+    :return: array []
+    '''
+    count = len(snail[0])-1
+    i = 0
+    j = count
+    end = snail[0]
+    value = 0
+    alg = ['d', 'l', 'u', 'r']
+    dic = {'d': (1,0), 'l': (0,-1), 'u': (-1,0), 'r': (0,1)}
+    while count > 0:
+        for iteration in range(count):
+            i += dic[alg[value]][0]
+            j += dic[alg[value]][1]
+            end.append(snail[i][j])
+        if value % 2: count -= 1
+        value = (value+1) % 4
+    return end
