@@ -164,3 +164,19 @@ def smallest_possible_sum(seq: list) -> int:
         return rec(seq) * l
     else:
         return rec(seq[:20]) * l
+
+def dirredir(arr):
+    """
+    Direction redirection (removes unnecessary steps)
+    :param arr: list of direction
+    :return: final path
+    :example: ["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"] returns ['WEST']
+    """
+    i = 0
+    while i < len(arr) - 1:
+        if arr[i] != arr[i + 1] and len(arr[i]) == len(arr[i + 1]):
+            arr = arr[:i] + arr[i + 2:]
+            i = 0
+            continue
+        i += 1
+    return arr
