@@ -144,7 +144,7 @@ def smallest_possible_sum(seq: list) -> int:
     :param seq: input list
     :return: smallest possible sum
     '''
-    def rec(seq):
+    def rec(seq: list) -> int:
         if len(seq) == 1: return sum(seq)
         l = len(seq)
         lst = []
@@ -165,7 +165,8 @@ def smallest_possible_sum(seq: list) -> int:
     else:
         return rec(seq[:20]) * l
 
-def dirredir(arr):
+
+def dirredir(arr: list) -> list:
     """
     Direction redirection (removes unnecessary steps)
     :param arr: list of direction
@@ -180,3 +181,61 @@ def dirredir(arr):
             continue
         i += 1
     return arr
+
+
+def is_interesting(num: int, ap: list) -> int:
+    """
+    Сheck numerical for interestingness
+    If num is palindrome (345543, 676)
+    or incementing (45678, 123)
+    or decrementing (87654)
+    or  followed by all zeros (1000, 400000)
+    return 2 (Yes)
+    :param num: current number
+    :param ap: list of needed numbers
+    :return: 0 or 1 or 2 (No, Almost, Yes)
+    """
+    def is_pol(n: int) -> bool:
+        if n < 100:
+            return False
+        n = str(n)
+        start = n[:int((len(n) / 2))]
+        if len(n) % 2 == 0:
+            finish = n[int(len(n) / 2):]
+        else:
+            finish = n[int((len(n) / 2) + 1):]
+        if start == finish[::-1]:
+            return True
+        else:
+            return False
+
+    def is_incdec(n: int) -> bool:
+        if n < 110:
+            return False
+        n = str(n)
+        if n[0] == "0":
+            return False
+        if n[0] > n[1]:
+            n = n[::-1]
+        for i in range(len(n) - 1):
+            if (int(n[i]) + 1) % 10 == int(n[i + 1]):
+                continue
+            else:
+                return False
+        return True
+
+    def is_straight(n: int) -> bool:
+        if n < 100:
+            return False
+        n = str(n)
+        if n[0] != "0" and n.count("0") == len(n) - 1:
+            return True
+        else:
+            return False
+
+    if num in ap: return 2
+    if is_pol(num) or is_straight(num) or is_incdec(num): return 2
+    if num + 1 in ap or num + 2 in ap: return 1
+    if is_pol(num + 1) or is_pol(num + 2) or is_straight(num + 1) or is_straight(num + 2) or is_incdec(
+        num + 1) or is_incdec(num + 2): return 1
+    return 0
