@@ -187,7 +187,7 @@ def is_interesting(num: int, ap: list) -> int:
     """
     Сheck numerical for interestingness
     If num is palindrome (345543, 676)
-    or incementing (45678, 123)
+    or incrementing (45678, 123)
     or decrementing (87654)
     or  followed by all zeros (1000, 400000)
     return 2 (Yes)
