@@ -1,10 +1,10 @@
 def hamming(n: int) -> int:
-    '''
+    """
     Calculate the Hamming numbers
     :param n: Hamming number required
     :return: nth Hamming number
     :example: print(hamming(5000))
-    '''
+    """
     mas = []
     a2 = 1
     for i in range(1, 50):
@@ -21,11 +21,11 @@ def hamming(n: int) -> int:
 
 
 def decompose(n: int) -> int or None:
-    '''
+    """
     Decompose input number (if n=11, output: [1, 2, 4, 10], explain: 1**2 + 2**2 + 4**2 + 10**2 == 11**2)
     :param n: Input number to decompose
     :return: Result of decompose
-    '''
+    """
     summ = 0
     end = [n]
     while end:
@@ -45,39 +45,42 @@ class RomanNumerals(object):
 
     @staticmethod
     def to_roman(number: int) -> str:
-        '''Str roman to int
+        """
+        Str roman to int
         :param number: int like 1616
         :return: roman like 'MDCXVI'
-        :example: print(RomanNumerals.from_roman(1616))'''
-        dict = {1000: 'M', 500: 'D', 100: 'C', 50: 'L', 10: 'X', 5: 'V', 1: 'I'}
+        :example: print(RomanNumerals.from_roman(1616))
+        """
+        di = {1000: 'M', 500: 'D', 100: 'C', 50: 'L', 10: 'X', 5: 'V', 1: 'I'}
         string = list(str(number))
         lst = []
         roman = ''
         lst.append(int(string[len(string) - 1]))
         string = string[::-1]
         for dec in range(1, 4):
-            if len(string) <= 1: break
-            if string[dec]: lst.append(int(string[dec]) * (10 ** dec))
+            if len(string) <= 1:
+                break
+            if string[dec]:
+                lst.append(int(string[dec]) * (10 ** dec))
         lst = lst[::-1]
-        sortkeys = sorted(dict.keys())[::-1]
+        sortkeys = sorted(di.keys())[::-1]
         for element in lst:
-            i = 0
             for sort in sortkeys:
                 while element:
                     value = element - sort
                     if value >= 0:
-                        roman += dict[sort]
+                        roman += di[sort]
                         element -= sort
                         continue
                     else:
                         value = abs(value)
-                        if dict.get(value):
-                            roman += dict[value]
-                            roman += dict[sort]
+                        if di.get(value):
+                            roman += di[value]
+                            roman += di[sort]
                             element -= sort - value
-                        elif dict.get(value * 2):
-                            roman += dict[value] * 2
-                            roman += dict[sort]
+                        elif di.get(value * 2):
+                            roman += di[value] * 2
+                            roman += di[sort]
                             element -= sort - value * 2
                         else:
                             break
@@ -85,26 +88,26 @@ class RomanNumerals(object):
 
     @staticmethod
     def from_roman(roman: str) -> int:
-        '''
+        """
         Str roman to int
         :param roman: string like 'MDCXVI'
         :return: number int 1616
         :example: print(RomanNumerals.from_roman('MDCXVI'))
-        '''
-        dict = {'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1}
+        """
+        di = {'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1}
         number = 0
         prev = 0
         for i in range(len(roman) - 1, -1, -1):
-            if prev <= dict[roman[i]]:
-                number += dict[roman[i]]
-                prev = dict[roman[i]]
+            if prev <= di[roman[i]]:
+                number += di[roman[i]]
+                prev = di[roman[i]]
             else:
-                number -= dict[roman[i]]
+                number -= di[roman[i]]
         return number
 
 
 def resnail(snail: list[list]) -> list[int]:
-    '''
+    """
     Convert array from [[ 1,  2,  3, 4],
                                     [12, 13, 14, 5],
                                     [11, 16, 15, 6],
@@ -112,20 +115,21 @@ def resnail(snail: list[list]) -> list[int]:
     to [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     :param snail: array NxN [[], [], []]
     :return: array []
-    '''
+    """
     count = len(snail[0])-1
     i = 0
     j = count
     end = snail[0]
     value = 0
     alg = ['d', 'l', 'u', 'r']
-    dic = {'d': (1,0), 'l': (0,-1), 'u': (-1,0), 'r': (0,1)}
+    dic = {'d': (1, 0), 'l': (0, -1), 'u': (-1, 0), 'r': (0, 1)}
     while count > 0:
         for iteration in range(count):
             i += dic[alg[value]][0]
             j += dic[alg[value]][1]
             end.append(snail[i][j])
-        if value % 2: count -= 1
+        if value % 2:
+            count -= 1
         value = (value+1) % 4
     return end
 
@@ -145,25 +149,29 @@ def smallest_possible_sum(s: list[int]) -> int:
     :return: smallest possible sum
     """
     def rec(seq: list[int]) -> int:
-        if len(seq) == 1: return sum(seq)
-        l = len(seq)
+        if len(seq) == 1:
+            return sum(seq)
+        lenn = len(seq)
         lst = []
         value = max(seq)
-        if seq.count(seq[0]) == l: return seq[0]
-        for num in range(l - 1):
+        if seq.count(seq[0]) == lenn:
+            return seq[0]
+        for num in range(lenn - 1):
             if seq[num] < seq[num + 1]:
                 value = seq[num + 1] % seq[num]
-                if value == 0: value = seq[num]
+                if value == 0:
+                    value = seq[num]
             elif seq[num] > seq[num + 1]:
                 value = seq[num] % seq[num + 1]
-                if value == 0: value = seq[num + 1]
+                if value == 0:
+                    value = seq[num + 1]
             lst.append(value)
         return rec(lst)
-    lenght = len(s)
-    if lenght <= 10:
-        return rec(s) * lenght
+    length = len(s)
+    if length <= 10:
+        return rec(s) * length
     else:
-        return rec(s[:20]) * lenght
+        return rec(s[:20]) * length
 
 
 def dirredir(arr: list[str]) -> list[str]:
@@ -239,11 +247,12 @@ def is_interesting(num: int, ap: list[int]) -> int:
         return 2
     if num + 1 in ap or num + 2 in ap:
         return 1
-    if is_pol(num + 1) or is_pol(num + 2) \
-                    or is_straight(num + 1) \
-                    or is_straight(num + 2) \
-                    or is_incdec(num + 1) \
-                    or is_incdec(num + 2):
+    if is_pol(num + 1) \
+            or is_pol(num + 2) \
+            or is_straight(num + 1) \
+            or is_straight(num + 2) \
+            or is_incdec(num + 1) \
+            or is_incdec(num + 2):
         return 1
     return 0
 
@@ -263,7 +272,7 @@ def josephus(items: list[int], k: int) -> list[int]:
     i = 0
     cnt = 1
     path = []
-    while items != []:
+    while items is []:
         if i >= len(items):
             i = 0
         if cnt == k:
