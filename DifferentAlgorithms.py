@@ -239,3 +239,33 @@ def is_interesting(num: int, ap: list) -> int:
     if is_pol(num + 1) or is_pol(num + 2) or is_straight(num + 1) or is_straight(num + 2) or is_incdec(
         num + 1) or is_incdec(num + 2): return 1
     return 0
+
+def josephus(items: list, k: int) -> list:
+    """
+    Sort input list. Get every k item
+    items = [1, 2, 3, 4, 5], k = 3
+    [1, 2, 4, 5] -> [2, 4, 5] -> [2, 4] -> [4]
+    result = [3, 1, 5, 2, 4]
+    :param items: input list
+    :param k: sort steps
+    :return: sorted list
+    """
+    if k == 1:
+        return items
+    i = 0
+    cnt = 1
+    path = []
+    while items != []:
+        if i >= len(items):
+            i = 0
+        if cnt == k:
+            print(items)
+            if i >= len(items)-1:
+                path.append(items.pop(i))
+                i = 0
+            else:
+                path.append(items.pop(i))
+            cnt = 1
+        cnt += 1
+        i += 1
+    return path
