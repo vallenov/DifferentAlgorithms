@@ -20,7 +20,7 @@ def hamming(n: int) -> int:
     return mas[n-1]
 
 
-def decompose(n: int) -> int:
+def decompose(n: int) -> int or None:
     '''
     Decompose input number (if n=11, output: [1, 2, 4, 10], explain: 1**2 + 2**2 + 4**2 + 10**2 == 11**2)
     :param n: Input number to decompose
@@ -44,7 +44,7 @@ def decompose(n: int) -> int:
 class RomanNumerals(object):
 
     @staticmethod
-    def to_roman(number):
+    def to_roman(number: int) -> str:
         '''Str roman to int
         :param number: int like 1616
         :return: roman like 'MDCXVI'
@@ -84,7 +84,7 @@ class RomanNumerals(object):
         return roman
 
     @staticmethod
-    def from_roman(roman):
+    def from_roman(roman: str) -> int:
         '''
         Str roman to int
         :param roman: string like 'MDCXVI'
@@ -103,7 +103,7 @@ class RomanNumerals(object):
         return number
 
 
-def snail(snail: list) -> list:
+def resnail(snail: list[list]) -> list[int]:
     '''
     Convert array from [[ 1,  2,  3, 4],
                                     [12, 13, 14, 5],
@@ -130,8 +130,8 @@ def snail(snail: list) -> list:
     return end
 
 
-def smallest_possible_sum(seq: list) -> int:
-    '''
+def smallest_possible_sum(s: list[int]) -> int:
+    """
     Find smallect possible sum of the input list
     Solution steps:
     [6, 9, 21] #-> x[2] = 21 - 9
@@ -141,10 +141,10 @@ def smallest_possible_sum(seq: list) -> int:
     [6, 3, 3] #-> X[2] = 6 - 3
     [3, 3, 3] #-> X[1] = 3 - 3 stop return sum([3, 3, 3])
 
-    :param seq: input list
+    :param s: input list
     :return: smallest possible sum
-    '''
-    def rec(seq: list) -> int:
+    """
+    def rec(seq: list[int]) -> int:
         if len(seq) == 1: return sum(seq)
         l = len(seq)
         lst = []
@@ -159,14 +159,14 @@ def smallest_possible_sum(seq: list) -> int:
                 if value == 0: value = seq[num + 1]
             lst.append(value)
         return rec(lst)
-    l = len(seq)
-    if l <= 10:
-        return rec(seq) * l
+    lenght = len(s)
+    if lenght <= 10:
+        return rec(s) * lenght
     else:
-        return rec(seq[:20]) * l
+        return rec(s[:20]) * lenght
 
 
-def dirredir(arr: list) -> list:
+def dirredir(arr: list[str]) -> list[str]:
     """
     Direction redirection (removes unnecessary steps)
     :param arr: list of direction
@@ -183,7 +183,7 @@ def dirredir(arr: list) -> list:
     return arr
 
 
-def is_interesting(num: int, ap: list) -> int:
+def is_interesting(num: int, ap: list[int]) -> int:
     """
     Сheck numerical for interestingness
     If num is palindrome (345543, 676)
@@ -233,14 +233,22 @@ def is_interesting(num: int, ap: list) -> int:
         else:
             return False
 
-    if num in ap: return 2
-    if is_pol(num) or is_straight(num) or is_incdec(num): return 2
-    if num + 1 in ap or num + 2 in ap: return 1
-    if is_pol(num + 1) or is_pol(num + 2) or is_straight(num + 1) or is_straight(num + 2) or is_incdec(
-        num + 1) or is_incdec(num + 2): return 1
+    if num in ap:
+        return 2
+    if is_pol(num) or is_straight(num) or is_incdec(num):
+        return 2
+    if num + 1 in ap or num + 2 in ap:
+        return 1
+    if is_pol(num + 1) or is_pol(num + 2) \
+                    or is_straight(num + 1) \
+                    or is_straight(num + 2) \
+                    or is_incdec(num + 1) \
+                    or is_incdec(num + 2):
+        return 1
     return 0
 
-def josephus(items: list, k: int) -> list:
+
+def josephus(items: list[int], k: int) -> list[int]:
     """
     Sort input list. Get every k item
     items = [1, 2, 3, 4, 5], k = 3
@@ -269,3 +277,25 @@ def josephus(items: list, k: int) -> list:
         cnt += 1
         i += 1
     return path
+
+
+def pick_peaks(arr: list[int]) -> dict:
+    """
+    Find list peaks
+    [1,2,3,1,2,2,5,2] -> {'pos': [2, 6], 'peaks': [3, 5]}
+    :param arr: input list
+    :return: dict like {'pos': [], 'peaks': []}
+    """
+    result = {"pos": [], "peaks": []}
+    up = False
+    cur = 0
+    for elem in range(len(arr)-1):
+        if arr[elem] < arr[elem+1]:
+            up = True
+            cur = elem
+        elif arr[elem] > arr[elem+1]:
+            if up is True:
+                result["pos"].append(cur+1)
+                result["peaks"].append(arr[cur+1])
+            up = False
+    return result
