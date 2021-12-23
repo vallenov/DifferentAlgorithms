@@ -308,3 +308,37 @@ def pick_peaks(arr: list[int]) -> dict:
                 result["peaks"].append(arr[cur+1])
             up = False
     return result
+
+
+def tic_tac_toe_check(board: list[list]) -> int:
+    """
+    Tic-Tac-Toe checker (3x3)
+    :param board: the current state of the board
+    [[0, 1, 2],
+     [0, 1, 2],
+     [1, 0, 2]]
+    :return: -1: the game is not over
+              0: game over. result is draw
+              1: game over. 1 player win
+              2: game over. 2 player win
+    """
+    def check_win(field, player):
+        if ''.join([str(field[0][0]), str(field[1][1]), str(field[2][2])]).count(str(player)) == 3:
+            return 1
+        if ''.join([str(field[0][2]), str(field[1][1]), str(field[2][0])]).count(str(player)) == 3:
+            return 1
+        for row in range(len(field)):
+            if str(field[row]).count(str(player)) == 3:
+                return 1
+        for col in range(len(field)):
+            if str([field[i][col] for i in range(len(field))]).count(str(player)) == 3:
+                return 1
+        return 0
+    if check_win(board, 1):
+        return 1
+    elif check_win(board, 2):
+        return 2
+    elif "0" not in ''.join([str(i) for i in board]):
+        return 0
+    else:
+        return -1
