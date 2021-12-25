@@ -1,3 +1,6 @@
+from typing import List
+
+
 def hamming(n: int) -> int:
     """
     Calculate the Hamming numbers
@@ -106,7 +109,7 @@ class RomanNumerals(object):
         return number
 
 
-def resnail(snail: list[list]) -> list[int]:
+def resnail(snail: List[List]) -> List[int]:
     """
     Convert array from [[ 1,  2,  3, 4],
                                     [12, 13, 14, 5],
@@ -133,8 +136,7 @@ def resnail(snail: list[list]) -> list[int]:
         value = (value+1) % 4
     return end
 
-
-def smallest_possible_sum(s: list[int]) -> int:
+def smallest_possible_sum(s: List[int]) -> int:
     """
     Find smallect possible sum of the input list
     Solution steps:
@@ -148,7 +150,7 @@ def smallest_possible_sum(s: list[int]) -> int:
     :param s: input list
     :return: smallest possible sum
     """
-    def rec(seq: list[int]) -> int:
+    def rec(seq: List[int]) -> int:
         if len(seq) == 1:
             return sum(seq)
         lenn = len(seq)
@@ -174,7 +176,7 @@ def smallest_possible_sum(s: list[int]) -> int:
         return rec(s[:20]) * length
 
 
-def dirredir(arr: list[str]) -> list[str]:
+def dirredir(arr: List[str]) -> List[str]:
     """
     Direction redirection (removes unnecessary steps)
     :param arr: list of direction
@@ -191,7 +193,7 @@ def dirredir(arr: list[str]) -> list[str]:
     return arr
 
 
-def is_interesting(num: int, ap: list[int]) -> int:
+def is_interesting(num: int, ap: List[int]) -> int:
     """
     Сheck numerical for interestingness
     If num is palindrome (345543, 676)
@@ -257,7 +259,7 @@ def is_interesting(num: int, ap: list[int]) -> int:
     return 0
 
 
-def josephus(items: list[int], k: int) -> list[int]:
+def josephus(items: List[int], k: int) -> List[int]:
     """
     Sort input list. Get every k item
     items = [1, 2, 3, 4, 5], k = 3
@@ -288,7 +290,7 @@ def josephus(items: list[int], k: int) -> list[int]:
     return path
 
 
-def pick_peaks(arr: list[int]) -> dict:
+def pick_peaks(arr: List[int]) -> dict:
     """
     Find list peaks
     [1,2,3,1,2,2,5,2] -> {'pos': [2, 6], 'peaks': [3, 5]}
@@ -310,7 +312,7 @@ def pick_peaks(arr: list[int]) -> dict:
     return result
 
 
-def tic_tac_toe_check(board: list[list]) -> int:
+def tic_tac_toe_check(board: List[list]) -> int:
     """
     Tic-Tac-Toe checker (3x3)
     :param board: the current state of the board
@@ -342,3 +344,14 @@ def tic_tac_toe_check(board: list[list]) -> int:
         return 0
     else:
         return -1
+
+
+def count_zeros(n):
+    """
+    Count the number of zeros in the end of factorial "n"
+    zeros(100) == 24
+    :params n: т factorial number
+    :return: count the number of zeros
+    """
+    return sum([n // (5 ** i) for i in range(1,15)])
+
