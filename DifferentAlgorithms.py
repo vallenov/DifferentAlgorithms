@@ -136,6 +136,7 @@ def resnail(snail: List[List]) -> List[int]:
         value = (value+1) % 4
     return end
 
+
 def smallest_possible_sum(s: List[int]) -> int:
     """
     Find smallect possible sum of the input list
@@ -350,8 +351,19 @@ def count_zeros(n):
     """
     Count the number of zeros in the end of factorial "n"
     zeros(100) == 24
-    :params n: т factorial number
+    :params n: n factorial number
     :return: count the number of zeros
     """
     return sum([n // (5 ** i) for i in range(1,15)])
+
+
+def generate_hashtag(s: str) -> str or None:
+    """
+    Turn string to hashtag
+    How are you? -> #HowAreYou?
+    :param s: input string
+    :return: hashtag or None if string is empty or length >= 140
+    """
+    if s == '' or len(s) > 139: return None
+    return '#' + ''.join(list(s.strip().title().replace(" ", "")))
 
