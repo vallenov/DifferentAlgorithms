@@ -367,3 +367,63 @@ def generate_hashtag(s: str) -> str or None:
     if s == '' or len(s) > 139: return None
     return '#' + ''.join(list(s.strip().title().replace(" ", "")))
 
+
+import re
+
+
+def peak_height(m: List[str]) -> int:
+    """
+    Get peak height
+    ['^^^^^^       ',
+     ' ^^^^^^^^    ',
+     '  ^^^^^^^    ',
+     '  ^^^^^      ',
+     '  ^^^^^^^^^^^',
+     '  ^^^^^^     ',
+     '  ^^^^       ']
+
+     =====>
+
+     ['111111     ',
+      '12222111   ',
+      '1233211    ',
+      '12321      ',
+      '12332111111',
+      '122211     ',
+      '1111       ']
+
+      == 3
+
+    :param m: scheme of mountain
+    :return: peak height
+    """
+    def check(mat):
+        for i in range(len(mat)):
+            if "^" in ''.join(mat[i]):
+                return False
+        return True
+
+    def size_up(matrix):
+        nmatrix = list()
+        nmatrix.append("0" * (len(matrix[0]) + 2))
+        for i in range(len(matrix)):
+            nmatrix.append("0" + matrix[i] + "0")
+        nmatrix.append("0" * (len(matrix[0]) + 2))
+        return nmatrix
+    if m == [] or check(m) is True:
+        return 0
+    m = [re.sub(" ", "0", m[i]) for i in range(len(m))]
+    m = size_up(m)
+    m = [list(i) for i in m]
+    cnt = 0
+    ex = False
+    while ex is not True:
+        for i in range(1, len(m) - 1):
+            for j in range(1, len(m[0]) - 1):
+                if (m[i][j] == "^") and (
+                        str(cnt) in ''.join(m[i - 1][j]) + ''.join(m[i][j - 1:j + 2]) + ''.join(m[i + 1][j])):
+                    m[i][j] = str(cnt + 1)
+        if check(m):
+            ex = True
+        cnt += 1
+    return cnt
