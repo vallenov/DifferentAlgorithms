@@ -1,4 +1,5 @@
 from typing import List
+import re
 
 
 def hamming(n: int) -> int:
@@ -368,9 +369,6 @@ def generate_hashtag(s: str) -> str or None:
     return '#' + ''.join(list(s.strip().title().replace(" ", "")))
 
 
-import re
-
-
 def peak_height(m: List[str]) -> int:
     """
     Get peak height
@@ -427,3 +425,23 @@ def peak_height(m: List[str]) -> int:
             ex = True
         cnt += 1
     return cnt
+
+
+def increment_string(string: str) -> str:
+    """
+    Increment string
+    string -> string1
+    string0 -> string1
+    string9 -> string10
+    string0000 -> string0001
+    :param string: input string
+    :return: incremented string
+    """
+    try:
+        num = int(''.join(re.findall(r'\d*$', string)))
+    except ValueError:
+        return string + "1"
+    else:
+        length = len(''.join(re.findall(r'\d*$', string)))
+    return string[:string.rfind(''.join(re.findall(r'\d*$', string)))] + str(int(num + 1)).rjust(length, "0")
+
