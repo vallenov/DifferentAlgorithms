@@ -445,3 +445,19 @@ def increment_string(string: str) -> str:
         length = len(''.join(re.findall(r'\d*$', string)))
     return string[:string.rfind(''.join(re.findall(r'\d*$', string)))] + str(int(num + 1)).rjust(length, "0")
 
+
+def make_readable(seconds: int) -> str:
+    """
+    Translate int to str like hh:mm:ss
+    2345 sec => 00:39:05
+    :param seconds: sec
+    :return: hh:mm:ss
+    """
+    tm = [seconds // 3600, (seconds - ((seconds // 3600) * 3600)) // 60, seconds % 60]
+    ntm = []
+    for i in range(len(tm)):
+        if tm[i] < 10:
+            ntm.append("0" + str(tm[i]))
+            continue
+        ntm.append(str(tm[i]))
+    return "{}".format(':'.join(ntm))
