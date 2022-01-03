@@ -461,3 +461,56 @@ def make_readable(seconds: int) -> str:
             continue
         ntm.append(str(tm[i]))
     return "{}".format(':'.join(ntm))
+
+
+class PaginationHelper:
+    """
+    The constructor takes in an array of items and a integer indicating
+    how many items fit within a single page
+    """
+    def __init__(self, collection, items_per_page):
+        self.collection = collection
+        self.items_per_page = items_per_page
+
+    def item_count(self):
+        """
+        Returns the number of items within the entire collection
+        """
+        return len(self.collection)
+
+    def page_count(self):
+        """
+        Returns the number of pages
+        :param:
+        :return:
+        """
+        return (len(self.collection) // self.items_per_page) + 1
+
+    def page_item_count(self, page_index):
+        """
+        Returns the number of items on the current page. page_index is zero based
+        his method should return -1 for page_index values that are out of range
+        :param page_index: index of page
+        :return: count of items on the page
+        """
+        if page_index < self.page_count() - 1:
+            return self.items_per_page
+        elif page_index > self.page_count() - 1:
+            return -1
+        else:
+            return len(self.collection) % self.items_per_page
+
+    def page_index(self, item_index):
+        """
+        Determines what page an item is on. Zero based indexes.
+        his method should return -1 for item_index values that are out of range
+        :param item_index: item index
+        :return: number of page
+        """
+        if item_index >= len(self.collection):
+            return -1
+        elif item_index < 0:
+            return -1
+        else:
+            return item_index // self.items_per_page
+
