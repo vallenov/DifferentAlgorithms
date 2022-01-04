@@ -514,3 +514,15 @@ class PaginationHelper:
         else:
             return item_index // self.items_per_page
 
+
+def find_even_index(arr):
+    """
+    Find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the right of N.
+    If not exist, return -1
+    :param arr: input list
+    :return: index
+    """
+    for i in range(len(arr)):
+        if sum(arr[:i]) == sum(arr[i+1:]):
+            return i
+    return -1
