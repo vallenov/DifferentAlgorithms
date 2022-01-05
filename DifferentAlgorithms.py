@@ -526,3 +526,36 @@ def find_even_index(arr):
         if sum(arr[:i]) == sum(arr[i+1:]):
             return i
     return -1
+
+
+def dig_pow(n: int, p: int) -> int:
+    """
+    Given a positive integer n written as abcd... (a, b, c, d... being digits) and a positive integer p
+    Fnd a positive integer k, if it exists, such as the sum of the digits of n taken to the successive powers of p
+    is equal to k * n
+    (89, 1) should return 1 since 8¹ + 9² = 89 = 89 * 1
+    (92, 1) should return -1 since there is no k such as 9¹ + 2² equals 92 * k
+    (695, 2) should return 2 since 6² + 9³ + 5⁴= 1390 = 695 * 2
+    (46288, 3) should return 51 since 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 * 51
+    :param n: input number
+    :param p: pow start
+    :return: integer
+    """
+    lst = list(str(n))
+    lst = [int(j) for j in lst]
+    for i in range(len(lst)):
+        lst[i] **= p
+        p += 1
+    summ = sum(lst)
+    dub = n
+    if n > summ:
+        return -1
+    else:
+        count = 1
+        while 1:
+            if dub > summ:
+                return -1
+            elif dub == summ:
+                return count
+            count += 1
+            dub = n * count
