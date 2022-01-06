@@ -559,3 +559,28 @@ def dig_pow(n: int, p: int) -> int:
                 return count
             count += 1
             dub = n * count
+
+
+def queue_time(c: list, n: int) -> int:
+    """
+    Calculate the total time required for all the customers to check out
+    [3,4,10,2,5,6,9,1,1,4,5], 3
+    3, 2, 6, 5   => 16
+    4, 5, 9      => 18 (!)
+    10, 1, 1, 4  => 16
+    :param c: list of customers
+    :param n: count of queues
+    :return: total time
+    """
+    count = 0
+    if (len(c) < 1): return 0
+    if n >= len(c): return max(c)
+    while (sum(c[:n]) > 0):
+        for i in range(n):
+            if c[i] <= 0: continue
+            c[i] -= 1
+            if (c[i] == 0) and (len(c) > n): c[i] = c.pop(n)
+        count += 1
+    return count
+
+print(queue_time([3,4,10,2,5,6,9,1,1,4,5], 3))
