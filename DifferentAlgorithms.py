@@ -355,7 +355,7 @@ def count_zeros(n):
     :params n: n factorial number
     :return: count the number of zeros
     """
-    return sum([n // (5 ** i) for i in range(1,15)])
+    return sum([n // (5 ** i) for i in range(1, 15)])
 
 
 def generate_hashtag(s: str) -> str or None:
@@ -365,7 +365,8 @@ def generate_hashtag(s: str) -> str or None:
     :param s: input string
     :return: hashtag or None if string is empty or length >= 140
     """
-    if s == '' or len(s) > 139: return None
+    if s == '' or len(s) > 139:
+        return None
     return '#' + ''.join(list(s.strip().title().replace(" ", "")))
 
 
@@ -517,7 +518,8 @@ class PaginationHelper:
 
 def find_even_index(arr):
     """
-    Find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the right of N.
+    Find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the
+    right of N.
     If not exist, return -1
     :param arr: input list
     :return: index
@@ -573,12 +575,16 @@ def queue_time(c: list, n: int) -> int:
     :return: total time
     """
     count = 0
-    if (len(c) < 1): return 0
-    if n >= len(c): return max(c)
-    while (sum(c[:n]) > 0):
+    if len(c) < 1:
+        return 0
+    if n >= len(c):
+        return max(c)
+    while sum(c[:n]) > 0:
         for i in range(n):
-            if c[i] <= 0: continue
+            if c[i] <= 0:
+                continue
             c[i] -= 1
-            if (c[i] == 0) and (len(c) > n): c[i] = c.pop(n)
+            if (c[i] == 0) and (len(c) > n):
+                c[i] = c.pop(n)
         count += 1
     return count
