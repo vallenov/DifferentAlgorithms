@@ -582,5 +582,3 @@ def queue_time(c: list, n: int) -> int:
             if (c[i] == 0) and (len(c) > n): c[i] = c.pop(n)
         count += 1
     return count
-
-print(queue_time([3,4,10,2,5,6,9,1,1,4,5], 3))
