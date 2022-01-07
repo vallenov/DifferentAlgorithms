@@ -588,3 +588,22 @@ def queue_time(c: list, n: int) -> int:
                 c[i] = c.pop(n)
         count += 1
     return count
+
+
+def tribonacci(signature, n):
+    """
+    Like fibonacci, but the next number based on the 3 numbers to the left
+    [1,2,3], 10 => [1, 2, 3, 6, 11, 20, 37, 68, 125, 230]
+    :params signature: start numbers
+    :params n: count of iterations
+    :return: list of tribonacci numbers
+    """
+    if n == 0:
+        return []
+    elif n == 1:
+        return [1]
+    if len(signature) >= n:
+        return signature
+    else:
+        signature.append(sum(signature[-3:]))
+        return tribonacci(signature, n)
