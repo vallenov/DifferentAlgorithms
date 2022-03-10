@@ -607,3 +607,25 @@ def tribonacci(signature, n):
     else:
         signature.append(sum(signature[-3:]))
         return tribonacci(signature, n)
+
+
+def valid_parentheses(string):
+    """
+    Check parentheses
+    example: '(())' -> True, '' -> False
+    :param string: like '(())' or '))(()'
+    :return: boolean
+    """
+    lst = list(string)
+    count = 0
+    for i in range(len(lst)):
+        if lst[i] == "(":
+            count += 1
+        if lst[i] == ")":
+            count -= 1
+        if count < 0:
+            return False
+    if count == 0:
+        return True
+    else:
+        return False
