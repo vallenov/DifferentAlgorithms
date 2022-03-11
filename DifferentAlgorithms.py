@@ -629,3 +629,31 @@ def valid_parentheses(string):
         return True
     else:
         return False
+
+
+def row_sum_odd_numbers(n):
+    """
+    Find summ of:
+                 1
+              3     5
+           7     9    11
+       13    15    17    19
+    21    23    25    27    29
+
+    1 -->  1
+    2 --> 3 + 5 = 8
+    :param n: count of rows
+    :return: sum of nth row
+    """
+    buf = 1
+    up = 2
+    if n == 1:
+        return 1
+    for i in range(n-1):
+        buf += up
+        up = up + 2
+    count = buf
+    for j in range(n-1):
+        buf += 2
+        count += buf
+    return count
