@@ -657,3 +657,20 @@ def row_sum_odd_numbers(n):
         buf += 2
         count += buf
     return count
+
+
+def twosum(nums: List[int], target: int) -> List[int] or None:
+    """
+    Given an array of integers nums and an integer target,
+    return indices of the two numbers such that they add up to target
+    :param nums: input list
+    :param target: upper bound
+    :return: [the numbers] which sum == target
+    """
+    for j in range(len(nums)):
+        for k in range(len(nums)):
+            if j == k:
+                continue
+            if nums[j] + nums[k] == target:
+                return [j, k]
+    return None
