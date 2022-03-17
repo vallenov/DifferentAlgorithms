@@ -674,3 +674,85 @@ def twosum(nums: List[int], target: int) -> List[int] or None:
             if nums[j] + nums[k] == target:
                 return [j, k]
     return None
+
+
+class ListNode:
+    """
+    Like a list node
+    """
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+def addtwonumbers(l1: ListNode, l2: ListNode) -> ListNode:
+    """
+    ListNode's sum
+
+    ListNode1 = 2 -> 4 -> 3
+    ListNode1 = 5 -> 6 -> 4
+    Result = 7 -> 0 -> 8
+    fin = addtwonumbers(l1, l2)
+
+    :param l1: first ListNode
+    :param l2: second ListNode
+    :return: ListNode
+    """
+    dec = 0
+    finlist = ListNode()
+    l1over = 0
+    l2over = 0
+    head = finlist
+
+    while True:
+        if not l1:
+            l1over = 1
+            l1buf = 0
+        else:
+            l1buf = l1.val
+        if not l2:
+            l2over = 1
+            l2buf = 0
+        else:
+            l2buf = l2.val
+        if l1over and l2over:
+            break
+        if l1buf + l2buf + dec > 9:
+            finlist.next = ListNode((l1buf + l2buf + dec) % 10)
+            dec = 1
+        else:
+            finlist.next = ListNode(l1buf + l2buf + dec)
+            dec = 0
+        if l1:
+            l1 = l1.next
+        if l2:
+            l2 = l2.next
+        finlist = finlist.next
+    if dec:
+        finlist.next = ListNode(dec)
+    finlist = head
+    return finlist.next
+
+
+def create_listnode(lst: list) -> ListNode:
+    """
+    Convern regular list to custom list
+
+    l = add_to_ln([2,4,3])
+
+    while l:
+        print(l.val)
+        l = l.next
+
+    :param lst: input list
+    :return: ListNode
+    """
+    head = None
+    for val in lst:
+        if head is None:
+            ln = ListNode(val)
+            head = ln
+        else:
+            ln.next = ListNode(val)
+            ln = ln.next
+    return head
