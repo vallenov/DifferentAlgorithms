@@ -738,7 +738,7 @@ def create_listnode(lst: list) -> ListNode:
     """
     Convern regular list to custom list
 
-    l = add_to_ln([2,4,3])
+    l = create_listnode([2,4,3])
 
     while l:
         print(l.val)
@@ -748,6 +748,7 @@ def create_listnode(lst: list) -> ListNode:
     :return: ListNode
     """
     head = None
+    ln = None
     for val in lst:
         if head is None:
             ln = ListNode(val)
