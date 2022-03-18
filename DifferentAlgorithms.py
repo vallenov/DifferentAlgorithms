@@ -757,3 +757,20 @@ def create_listnode(lst: list) -> ListNode:
             ln.next = ListNode(val)
             ln = ln.next
     return head
+
+
+def find_median_sorted_arrays(nums1: List[int], nums2: List[int]) -> float:
+    """
+    Get the median of the two sorted lists
+    :param nums1: first sorted list
+    :param nums2: second sorted list
+    :return: the median
+    """
+    lst = []
+    lst.extend(nums1)
+    lst.extend(nums2)
+    lst.sort()
+    if len(lst) % 2 != 0:
+        return float(lst[int((len(lst) - 1) / 2)])
+    else:
+        return float(lst[int(len(lst) / 2) - 1] + lst[int(len(lst) / 2)]) / 2
