@@ -774,3 +774,12 @@ def find_median_sorted_arrays(nums1: List[int], nums2: List[int]) -> float:
         return float(lst[int((len(lst) - 1) / 2)])
     else:
         return float(lst[int(len(lst) / 2) - 1] + lst[int(len(lst) / 2)]) / 2
+
+
+def is_palindrome(x: int) -> bool:
+    """
+    Check if a string is a palindrome
+    :param x: input string
+    :return: True or False
+    """
+    return True if str(x) == str(x)[::-1] else False
