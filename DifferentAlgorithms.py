@@ -783,3 +783,30 @@ def is_palindrome(x: int) -> bool:
     :return: True or False
     """
     return True if str(x) == str(x)[::-1] else False
+
+
+def longest_common_prefix(strs: List[str]) -> str:
+    """
+    Find the longest common prefix string amongst an array of strings
+    strs = ["strong","storm","steal"] -> "st"
+    :param strs: input array of strings
+    :return: longest common prefix
+    """
+    pref = ''
+    count = 0
+    minlenght = len(min(strs))
+    if minlenght == 0:
+        return ''
+    if len(strs) == 1:
+        return strs[0]
+    for i in range(len(strs[0])):
+        buf = str(strs[0][count])
+        for j in range(len(strs)):
+            if strs[j] == '':
+                return ''
+            if str(strs[j][count]) != buf:
+                return pref
+        pref += buf
+        count += 1
+        if count == minlenght:
+            return pref
