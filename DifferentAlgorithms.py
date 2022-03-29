@@ -810,3 +810,26 @@ def longest_common_prefix(strs: List[str]) -> str:
         count += 1
         if count == minlenght:
             return pref
+
+
+def valid_all_parentheses(s: str) -> bool:
+    """
+    Check parentheses
+    example: '(){}' -> True, '[[)' -> False
+    :param s: input string
+    :return: boolean
+    """
+    dics = {'[': ']', '(': ')', '{': '}', ']': '[', ')': '(', '}': '{'}
+    dicin = ['[', '(', '{']
+    lst = []
+    for i in s:
+        if i in dicin:
+            lst.append(i)
+        else:
+            if not len(lst):
+                return False
+            if dics[lst[len(lst) - 1]] != i:
+                return False
+            else:
+                lst.pop()
+    return False if len(lst) else True
