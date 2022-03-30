@@ -833,3 +833,71 @@ def valid_all_parentheses(s: str) -> bool:
             else:
                 lst.pop()
     return False if len(lst) else True
+
+
+def merge_two_lists(l1: ListNode, l2: ListNode) -> ListNode:
+    """
+    Merge two ListNode objects
+    For test you may use create_listnode()
+
+    l1 = create_listnode([2,4,3])
+    l2 = create_listnode([1,5,6])
+    =
+    ListNode(1 -> 2 -> 4 -> 3 -> 5 -> 6)
+
+    :param l1: first object
+    :param l2: second object
+    :return: merged ListNode object
+    """
+    fin = None
+    head = None
+    while l1 or l2:
+        if l1 and l2:
+            min_num = l1.val if l1.val < l2.val else l2.val
+            max_num = l1.val if l1.val > l2.val else l2.val
+            if not head:
+                fin = ListNode(min_num)
+                head = fin
+            else:
+                fin.next = ListNode(min_num)
+                fin = fin.next
+            if l1.next and l1.next.val < max_num:
+                l1 = l1.next
+                continue
+            if l2.next and l2.next.val < max_num:
+                l2 = l2.next
+                continue
+
+            fin.next = ListNode(max_num)
+            fin = fin.next
+
+            l1 = l1.next
+            l2 = l2.next
+            continue
+        if not l1:
+            while l2:
+                if not head:
+                    fin = ListNode(l2.val)
+                    head = fin
+                else:
+                    fin.next = ListNode(l2.val)
+                    fin = fin.next
+                l2 = l2.next
+        if not l2:
+            while l1:
+                if not head:
+                    fin = ListNode(l1.val)
+                    head = fin
+                else:
+                    fin.next = ListNode(l1.val)
+                    fin = fin.next
+                l1 = l1.next
+    fin = head
+    return fin
+
+l1 = create_listnode([2,4,3])
+l2 = create_listnode([1,5,6])
+mrg = merge_two_lists(l1, l2)
+while mrg:
+    print(mrg.val)
+    mrg = mrg.next
