@@ -894,10 +894,3 @@ def merge_two_lists(l1: ListNode, l2: ListNode) -> ListNode:
                 l1 = l1.next
     fin = head
     return fin
-
-l1 = create_listnode([2,4,3])
-l2 = create_listnode([1,5,6])
-mrg = merge_two_lists(l1, l2)
-while mrg:
-    print(mrg.val)
-    mrg = mrg.next
