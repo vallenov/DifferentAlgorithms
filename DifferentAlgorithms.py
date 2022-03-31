@@ -894,3 +894,21 @@ def merge_two_lists(l1: ListNode, l2: ListNode) -> ListNode:
                 l1 = l1.next
     fin = head
     return fin
+
+
+def remove_duplicates(nums: List[int]) -> int:
+    """
+    Return len of unique elements
+    Use the same var "nums"
+    :param nums: input sorted list
+    :return: len
+    """
+    lst = []
+    count = 0
+    for i in nums:
+        if i not in lst:
+            lst.append(i)
+            nums.insert(count, i)
+            count += 1
+    return len(lst)
+
