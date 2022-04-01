@@ -912,3 +912,22 @@ def remove_duplicates(nums: List[int]) -> int:
             count += 1
     return len(lst)
 
+
+def remove_element(nums: List[int], val: int) -> int:
+    """
+    Remove all numbers == val and return len of edited list
+    Use the same var "nums"
+    :param nums: input list
+    :param val: deleted value
+    :return: len
+    """
+    i = 0
+    if not nums:
+        return 0
+    while i != len(nums):
+        if nums[i] == val:
+            nums.pop(i)
+        else:
+            i += 1
+    return len(nums)
+
