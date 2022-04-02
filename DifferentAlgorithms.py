@@ -931,3 +931,38 @@ def remove_element(nums: List[int], val: int) -> int:
             i += 1
     return len(nums)
 
+
+def count_and_say(n: int, cnt=1, chars=None) -> str:
+    """
+    Input: n = 4
+    Output: "1211"
+    Explanation:
+    count_and_say(1) = "1"
+    count_and_say(2) = say "1" = one 1 = "11"
+    count_and_say(3) = say "11" = two 1's = "21"
+    count_and_say(4) = say "21" = one 2 + one 1 = "12" + "11" = "1211"
+    :param n: count of iteration
+    :param cnt: iterator
+    :param chars: buffer
+    """
+    if chars is None:
+        chars = ['1']
+    if cnt > n:
+        return ''.join(chars)
+    if cnt == 1:
+        chars = ['1']
+    else:
+        i = 0
+        while i < len(chars):
+            cur = chars[i]
+            j = i + 1
+            while j != len(chars) and chars[j] == cur:
+                j += 1
+            if j > 1:
+                for k in range(j - i - 1):
+                    chars.pop(i)
+            for u in range(len(str(j - i))):
+                chars.insert(i + u, str(j - i)[u])
+            i += 1 + len(str(j - i))
+    cnt += 1
+    return count_and_say(n, cnt, chars)
