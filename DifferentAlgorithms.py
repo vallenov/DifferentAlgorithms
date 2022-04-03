@@ -966,3 +966,15 @@ def count_and_say(n: int, cnt=1, chars=None) -> str:
             i += 1 + len(str(j - i))
     cnt += 1
     return count_and_say(n, cnt, chars)
+
+
+def plus_one(digits: List[int]) -> List[int]:
+    """
+    list + 1
+    [1, 3, 5] => [1, 3, 6]
+    [4, 9] => [5, 0]
+    0 <= digits[x] <= 9
+    :param digits: input int list
+    :return: output incremented int list
+    """
+    return list(map(lambda x: int(x), list(str(int(''.join([str(i) for i in digits])) + 1))))
